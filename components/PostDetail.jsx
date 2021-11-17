@@ -1,9 +1,13 @@
 import React from 'react'
 
-const PostDetail = () => {
+const PostDetail = ({ post }) => {
     return (
-        <div>
-            
+        <div className="bg-white shadow-lg rounded-lg lg:p-8 pb-12 mb-8">
+            <div className="relative overflow-hidden shadow-md mb-6">
+                <img 
+                    src={post.featuredImage.url}
+                />
+            </div>
         </div>
     )
 }
