@@ -11,7 +11,20 @@ const CommentsForm = ({ slug }) => {
     const storeDataElements = useRef()
 
     const handleCommentSubmit = () => {
+        setError(false)
+
+        const { value: commentValues } = commentElements.current
+        const { value: nameValues } = nameElements.current
+        const { value: emailValues } = emailElements.current
         
+        if ( !commentValues || !nameValues || !emailValues) {
+            setError(true)
+            return
+        }
+
+        const commentObj = {
+            nameValues, emailValues, commentValues, slug
+        }
     }
 
     return (
@@ -50,11 +63,47 @@ const CommentsForm = ({ slug }) => {
                     name="email"
                 />
             </div>
+            <div className="grid grid-cols-1 gap-4 mb-4">
+                <div>
+                    <input 
+                        ref={storeDataElements}
+                        type="checkbox"
+                        id="storeData"
+                        name="storeData"
+                        value="true"
+                    />
+                    <label className="text-gray-500 cursor-pointer ml-2">
+                        Save my Name and Email for my next comments
+                    </label>
+                </div>
+            </div>
             {error && <p className="text-xs text-red-500">
                 You should fill out All fields!
             </p>}
             <div className="mt-8">
-                <button type="button" onClick={handleCommentSubmit}>
+                <button 
+                    type="button" 
+                    onClick={handleCommentSubmit}
+                    className="
+                        transition
+                        duration-300
+                        ease
+                        hover:bg-indigo-900
+                        inline-block
+                        bg-pink-400
+                        text-lg
+                        rounded-full
+                        text-white
+                        px-8 py-3
+                        cursor-pointer
+                    "
+                >
+                Post Comment
+                {showSuccessMessage && 
+                    <span className="text-xl float-right font-semibold mt-3 text-green-500">
+                        Comments
+                    </span>
+                }
 
                 </button>
             </div>
