@@ -16,6 +16,7 @@ const CommentsForm = ({ slug }) => {
         const { value: commentValues } = commentElements.current
         const { value: nameValues } = nameElements.current
         const { value: emailValues } = emailElements.current
+        const { value: storeData } = storeDataElements.current
         
         if ( !commentValues || !nameValues || !emailValues) {
             setError(true)
@@ -24,6 +25,14 @@ const CommentsForm = ({ slug }) => {
 
         const commentObj = {
             nameValues, emailValues, commentValues, slug
+        }
+
+        if ( storeData ) {
+            localStorage.setItem('name', nameValues)
+            localStorage.setItem('email', emailValues)
+        } else {
+            localStorage.removeItem('name', nameValues)
+            localStorage.removeItem('email', emailValues)
         }
     }
 
