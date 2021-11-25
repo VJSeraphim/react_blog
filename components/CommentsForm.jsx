@@ -1,5 +1,7 @@
 import React, { useState, useEffect, useRef } from 'react'
 
+import { submitComment } from '../services'
+
 const CommentsForm = ({ slug }) => {
 
     const [error, setError] = useState(false)
@@ -9,6 +11,11 @@ const CommentsForm = ({ slug }) => {
     const nameElements = useRef()
     const emailElements = useRef()
     const storeDataElements = useRef()
+
+    useEffect(() => {
+        nameElements.current.value = window.localStorage.getItem('name')
+        emailElements.current.value = window.localStorage.getItem('email')
+    }, [])
 
     const handleCommentSubmit = () => {
         setError(false)
@@ -28,12 +35,19 @@ const CommentsForm = ({ slug }) => {
         }
 
         if ( storeData ) {
-            localStorage.setItem('name', nameValues)
-            localStorage.setItem('email', emailValues)
+            window.localStorage.setItem('name', nameValues)
+            window.localStorage.setItem('email', emailValues)
         } else {
-            localStorage.removeItem('name', nameValues)
-            localStorage.removeItem('email', emailValues)
+            window.localStorage.removeItem('name', nameValues)
+            window.localStorage.removeItem('email', emailValues)
         }
+
+        submitComment(commentObj).then((res) => {
+            setShowSuccessMessage(true)
+            setTimeout(() => {
+                setShowSuccessMessage(false)
+            }, 3000)
+        })
     }
 
     return (
