@@ -41,7 +41,7 @@ export const getPosts = async () => {
 export const getPostDetails = async (slug) => {
     const query = gql`
         query GetPostDetails($slug: String!) {
-            post(where: {slug: slug}){
+            post(where: {slug: $slug}){
                 author {
                     bio
                     id
@@ -96,7 +96,7 @@ export const getRecentPosts = async () => {
     return result.posts
 }
 
-export const getSimilarPosts = async() => {
+export const getSimilarPosts = async(categories, slug) => {
     const query = gql`
         query GetPostDetails($slug: String!, $categories: [String!]) {
             posts(
@@ -133,7 +133,7 @@ export const getCategories = async() => {
 }
 
 export const submitComment = async(obj) => {
-    const result = await fetch('api/comments', {
+    const result = await fetch('/api/comments', {
         method: 'POST',
         body: JSON.stringify(obj)
     })

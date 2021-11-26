@@ -43,9 +43,9 @@ const CommentsForm = ({ slug }) => {
         }
 
         submitComment(commentObj).then((res) => {
-            setShowSuccessMessage(true)
+            setShowSuccess(true)
             setTimeout(() => {
-                setShowSuccessMessage(false)
+                setShowSuccess(false)
             }, 3000)
         })
     }
@@ -56,7 +56,7 @@ const CommentsForm = ({ slug }) => {
 
             </h3>
             <div className="grid grid-cols-1 gap-4 mb-4">
-                <textArea ref={commentElements} className="
+                <textarea ref={commentElements} className="
                     p-4 outline-none w-full rounded-lg focus:ring-2
                     focus:ring-gray-200 bg-gray-100 text-gray-700
                 "
@@ -122,7 +122,7 @@ const CommentsForm = ({ slug }) => {
                     "
                 >
                 Post Comment
-                {showSuccessMessage && 
+                {showSuccess && 
                     <span className="text-xl float-right font-semibold mt-3 text-green-500">
                         Comments
                     </span>
