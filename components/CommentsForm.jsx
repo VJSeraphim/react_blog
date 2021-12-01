@@ -20,26 +20,26 @@ const CommentsForm = ({ slug }) => {
     const handleCommentSubmit = () => {
         setError(false)
 
-        const { value: commentValues } = commentElements.current
-        const { value: nameValues } = nameElements.current
-        const { value: emailValues } = emailElements.current
+        const { value: comment } = commentElements.current
+        const { value: name } = nameElements.current
+        const { value: email } = emailElements.current
         const { value: storeData } = storeDataElements.current
         
-        if ( !commentValues || !nameValues || !emailValues) {
+        if ( !comment || !name || !email) {
             setError(true)
             return
         }
 
         const commentObj = {
-            nameValues, emailValues, commentValues, slug
+            name, email, comment, slug
         }
 
         if ( storeData ) {
-            window.localStorage.setItem('name', nameValues)
-            window.localStorage.setItem('email', emailValues)
+            window.localStorage.setItem('name', name)
+            window.localStorage.setItem('email', email)
         } else {
-            window.localStorage.removeItem('name', nameValues)
-            window.localStorage.removeItem('email', emailValues)
+            window.localStorage.removeItem('name', name)
+            window.localStorage.removeItem('email', email)
         }
 
         submitComment(commentObj).then((res) => {
@@ -122,13 +122,12 @@ const CommentsForm = ({ slug }) => {
                     "
                 >
                 Post Comment
+                </button>
                 {showSuccess && 
                     <span className="text-xl float-right font-semibold mt-3 text-green-500">
-                        Comments
+                        Comment Successfully Submitted.
                     </span>
                 }
-
-                </button>
             </div>
         </div>
     )

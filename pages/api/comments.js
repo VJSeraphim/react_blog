@@ -15,15 +15,15 @@ export default async function comments(req, res) {
 
   const query = gql`
     mutation CreateComment(
-      $nameValues: String!, 
-      $emailValues: String!,
-      $commentValues: String!,
+      $name: String!, 
+      $email: String!,
+      $comment: String!,
       $slug: String!
     ) {
       createComment(data: {
-        name: $nameValues,
-        email: $emailValues,
-        comment: $commentValues,
+        name: $name,
+        email: $email,
+        comment: $comment,
         post: {
           connect: {
             slug: $slug
